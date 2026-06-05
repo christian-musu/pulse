@@ -64,9 +64,20 @@ npm run dev -- example.com
 
 # Con comando globale (dopo npm link)
 pulse https://example.com
+
+# Copia automaticamente il PDF anche sul Desktop
+pulse example.com --desktop
 ```
 
 Lo schema (`https://`) è facoltativo: `pulse example.com` viene normalizzato in `https://example.com`.
+
+### Opzioni
+
+| Opzione           | Descrizione                                                        |
+| ----------------- | ----------------------------------------------------------------- |
+| `-d, --desktop`   | A PDF pronto, lo copia anche sul Desktop dell'utente (`~/Desktop`) |
+| `-V, --version`   | Mostra la versione                                                 |
+| `-h, --help`      | Mostra l'aiuto                                                     |
 
 Output di esempio:
 
