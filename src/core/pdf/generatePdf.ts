@@ -221,8 +221,11 @@ export async function generatePdfReport(
     let pageNum = 0;
 
     const newPage = () => {
+      // Draw footer on current page before moving on (skip cover = page 0)
+      if (pageNum > 0) drawFooter(doc, pageNum);
       doc.addPage();
       pageNum++;
+      doc.y = MARGIN;
     };
 
     stream.on("finish", () => resolve(filePath));
@@ -532,12 +535,8 @@ export async function generatePdfReport(
       doc.moveDown(1.35);
     });
 
-    // ── FINAL FOOTER on each page ────────────────────────────────────────────
-    const totalPages = (doc as any)._pageBuffer?.length ?? pageNum;
-    for (let i = 0; i < pageNum; i++) {
-      doc.switchToPage(i);
-      if (i > 0) drawFooter(doc, i); // skip cover
-    }
+    // Footer sull'ultima pagina
+    if (pageNum > 0) drawFooter(doc, pageNum);
 
     doc.end();
   });
